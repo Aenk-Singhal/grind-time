@@ -22,34 +22,49 @@ function isCodingSite(url) {
     }
 }
 
+// Helper: Save time spent on current site
+function saveCurrentTime(leftSite) {
+    if (leftSite && startTime) {
+        const now = Date.now();
+        const duration = now - startTime;
+        
+        console.log(`Saving time for site: ${leftSite}, duration: ${duration}ms`);
+
+        // Save duration to storage, keyed by date and site
+        const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+        const storageKey = `time_${today}`;
+
+        chrome.storage.local.get([storageKey], (result) => {
+            let data = result[storageKey] || {};
+            if (!data[leftSite]) data[leftSite] = 0;
+            data[leftSite] += duration;
+            console.log(`Updated data for ${today}:`, data);
+            chrome.storage.local.set({ [storageKey]: data });
+        });
+    }
+}
+
 // Called when active tab changes or URL changes
 function handleTabChange(activeTabId) {
     chrome.tabs.get(activeTabId, (tab) => {
         if (!tab || !tab.url) return;
+        
+        let leftSite = currentSite;
+        console.log(`Tab changed to: ${tab.url}`);
+        console.log(`Current site before change: ${leftSite}`);
 
-        if (currentSite && startTime) {
-            // Calculate time spent on old site
-            const now = Date.now();
-            const duration = now - startTime;
+        // Save time for previous site BEFORE changing currentSite
+        saveCurrentTime(leftSite);
 
-            // Save duration to storage, keyed by date and site
-            const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-            const storageKey = `time_${today}`;
-
-            chrome.storage.local.get([storageKey], (result) => {
-                let data = result[storageKey] || {};
-                if (!data[currentSite]) data[currentSite] = 0;
-                data[currentSite] += duration;
-                chrome.storage.local.set({ [storageKey]: data });
-            });
-        }
-
+        // Now check if new tab is a coding site
         if (isCodingSite(tab.url)) {
             currentSite = new URL(tab.url).hostname.replace("www.", "");
             startTime = Date.now();
+            console.log(`Started tracking: ${currentSite}`);
         } else {
             currentSite = null;
             startTime = null;
+            console.log(`Stopped tracking (not a coding site)`);
         }
     });
 }
@@ -77,18 +92,24 @@ chrome.windows.getLastFocused({ populate: true }, (window) => {
 
 // When extension is suspended (like Chrome closing), save time for current site
 chrome.runtime.onSuspend.addListener(() => {
-    if (currentSite && startTime) {
-        const now = Date.now();
-        const duration = now - startTime;
+    saveCurrentTime(currentSite);
+});
 
-        const today = new Date().toISOString().slice(0, 10);
-        const storageKey = `time_${today}`;
-
-        chrome.storage.local.get([storageKey], (result) => {
-            let data = result[storageKey] || {};
-            if (!data[currentSite]) data[currentSite] = 0;
-            data[currentSite] += duration;
-            chrome.storage.local.set({ [storageKey]: data });
+// Also listen for window focus changes to handle switching between browser and other apps
+chrome.windows.onFocusChanged.addListener((windowId) => {
+    if (windowId === chrome.windows.WINDOW_ID_NONE) {
+        // Browser lost focus - save current time
+        saveCurrentTime(currentSite);
+        // Don't reset currentSite/startTime here, just pause tracking
+    } else {
+        // Browser gained focus - restart tracking if on coding site
+        chrome.tabs.query({active: true, lastFocusedWindow: true}, (tabs) => {
+            if (tabs[0]) {
+                if (isCodingSite(tabs[0].url) && currentSite) {
+                    // Resume tracking - reset start time
+                    startTime = Date.now();
+                }
+            }
         });
     }
 });

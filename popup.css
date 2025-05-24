@@ -1,37 +1,82 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    width: 280px;
-    margin: 0;
-    padding: 16px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    box-sizing: border-box;
-    user-select: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 300px;
+  margin: 0;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-sizing: border-box;
+  user-select: none;
 }
 
 .container {
-    text-align: center;
+  text-align: center;
 }
 
 h1 {
-    margin-bottom: 8px;
-    font-weight: 700;
-    font-size: 1.6rem;
-    letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 1.5px;
+  user-select: text;
 }
 
-p {
-    margin: 8px 0;
-    font-size: 1rem;
-    font-weight: 500;
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.tab-button {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  padding: 8px 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.25s ease;
+}
+
+.tab-button:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.tab-button.active {
+  background: white;
+  color: #764ba2;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.tab-content {
+  text-align: left;
 }
 
 .time-display {
-    margin-top: 16px;
-    font-size: 2rem;
-    font-weight: 700;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    padding: 12px 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  margin: 8px 0 16px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 12px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  user-select: text;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  max-height: 150px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+
+li {
+  font-size: 1.1rem;
+  margin: 6px 0;
+  user-select: text;
 }

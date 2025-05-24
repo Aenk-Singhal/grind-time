@@ -1,20 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Grind Time - Today</title>
-    <link rel="stylesheet" href="popup.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grind Time Stats</title>
+  <link rel="stylesheet" href="popup.css" />
 </head>
-
 <body>
-    <div class="container">
-        <h1>Grind Time</h1>
-        <p>Time spent on coding sites today:</p>
-        <div id="total-time" class="time-display">Loading...</div>
-    </div>
-    <script src="popup.js"></script>
-</body>
+  <div class="container">
+    <h1>Grind Time</h1>
 
+    <div class="tabs">
+      <button class="tab-button active" data-tab="today">Today</button>
+      <button class="tab-button" data-tab="week">Week</button>
+      <button class="tab-button" data-tab="month">Month</button>
+      <button class="tab-button" data-tab="streak">Streak</button>
+    </div>
+
+    <div id="content">
+
+      <!-- Today view -->
+      <div class="tab-content" id="today" style="display:block;">
+        <h2>Time Spent Today</h2>
+        <div id="today-total" class="time-display">Loading...</div>
+        <h3>Site-wise Breakdown</h3>
+        <ul id="today-breakdown"></ul>
+      </div>
+
+      <!-- Week view -->
+      <div class="tab-content" id="week" style="display:none;">
+        <h2>Time Spent in Last 7 Days</h2>
+        <div id="week-total" class="time-display">Loading...</div>
+      </div>
+
+      <!-- Month view -->
+      <div class="tab-content" id="month" style="display:none;">
+        <h2>Time Spent in Last 30 Days</h2>
+        <div id="month-total" class="time-display">Loading...</div>
+      </div>
+
+      <!-- Streak view -->
+      <div class="tab-content" id="streak" style="display:none;">
+        <h2>Current Daily Streak</h2>
+        <div id="streak-count" class="time-display">Loading...</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
 </html>
