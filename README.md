@@ -41,27 +41,21 @@ Stay motivated with your daily coding streak counter.
 
 ## Installation
 
-### Method 1: Manual Installation (Developer Mode)
+1. **Download the extension:**
+   - Go to: https://github.com/Aenk-Singhal/grind-time
+   - Click the green "Code" button → "Download ZIP"
+   - Extract the ZIP file
 
-1. **Download the Extension**
-   ```bash
-   git clone https://github.com/your-username/grind-time.git
-   cd grind-time
-   ```
-
-2. **Enable Developer Mode**
-   - Open Chrome and navigate to `chrome://extensions/`
-   - Toggle "Developer mode" in the top right corner
-
-3. **Load the Extension**
+2. **Install in Chrome:**
+   - Open Chrome → go to `chrome://extensions/`
+   - Turn ON "Developer mode" (top right toggle)
    - Click "Load unpacked"
-   - Select the `grind-time` folder you just downloaded
-   - The extension icon should appear in your toolbar
+   - Select the extracted `grind-time` folder
+   - Done! The extension icon appears in your toolbar
 
-4. **Start Coding!**
-   - Visit any supported coding website
-   - Your time will be automatically tracked
-   - Click the extension icon to view your stats
+3. **Start using:**
+   - Visit LeetCode, GitHub, or other coding sites
+   - Click the Grind Time icon to see your stats!
 
 ## Usage
 
