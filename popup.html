@@ -24,19 +24,56 @@
         <h2>Time Spent Today</h2>
         <div id="today-total" class="time-display">Loading...</div>
         <h3>Site-wise Breakdown</h3>
-        <ul id="today-breakdown"></ul>
+        <div class="chart-container">
+          <canvas id="today-chart" width="250" height="200"></canvas>
+        </div>
+        <div id="today-no-data" style="display:none;">
+          <p>No tracked sites today</p>
+        </div>
       </div>
 
       <!-- Week view -->
       <div class="tab-content" id="week" style="display:none;">
         <h2>Time Spent in Last 7 Days</h2>
         <div id="week-total" class="time-display">Loading...</div>
+        
+        <h3>Daily Trend</h3>
+        <div class="chart-container">
+          <canvas id="week-chart" width="250" height="180"></canvas>
+        </div>
+        <div id="week-no-data" style="display:none;">
+          <p>No tracked time this week</p>
+        </div>
+        
+        <h3>Site Breakdown</h3>
+        <div class="chart-container">
+          <canvas id="week-pie-chart" width="250" height="180"></canvas>
+        </div>
+        <div id="week-pie-no-data" style="display:none;">
+          <p>No site data this week</p>
+        </div>
       </div>
 
       <!-- Month view -->
       <div class="tab-content" id="month" style="display:none;">
         <h2>Time Spent in Last 30 Days</h2>
         <div id="month-total" class="time-display">Loading...</div>
+        
+        <h3>Daily Trend</h3>
+        <div class="chart-container">
+          <canvas id="month-chart" width="250" height="180"></canvas>
+        </div>
+        <div id="month-no-data" style="display:none;">
+          <p>No tracked time this month</p>
+        </div>
+        
+        <h3>Site Breakdown</h3>
+        <div class="chart-container">
+          <canvas id="month-pie-chart" width="250" height="180"></canvas>
+        </div>
+        <div id="month-pie-no-data" style="display:none;">
+          <p>No site data this month</p>
+        </div>
       </div>
 
       <!-- Streak view -->
@@ -48,6 +85,8 @@
     </div>
   </div>
 
+  <!-- Add Chart.js library locally -->
+  <script src="chart.min.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

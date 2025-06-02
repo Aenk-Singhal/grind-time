@@ -1,12 +1,15 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  width: 300px;
+  width: 350px; /* Increased width to accommodate charts */
   margin: 0;
   padding: 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  /*background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);*/
+  background-color: #222222;
+  color: #DDDDDD;
   box-sizing: border-box;
   user-select: none;
+  max-height: 600px; /* Set max height */
+  overflow-y: auto; /* Allow scrolling if needed */
 }
 
 .container {
@@ -21,43 +24,59 @@ h1 {
   user-select: text;
 }
 
+h2 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  color: #DDDDDD;
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin: 16px 0 8px 0;
+  color: #DDDDDD;
+  text-align: center;
+}
+
 .tabs {
   display: flex;
   justify-content: center;
   margin-bottom: 12px;
-  gap: 8px;
+  gap: 6px;
 }
 
 .tab-button {
   background: rgba(255, 255, 255, 0.15);
   border: none;
   border-radius: 8px;
-  color: white;
+  color: #CCCCCC;
   font-weight: 600;
-  padding: 8px 14px;
+  padding: 8px 12px;
   cursor: pointer;
   user-select: none;
   transition: background-color 0.25s ease;
+  font-size: 0.9rem;
 }
 
 .tab-button:hover:not(.active) {
   background: rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
 }
 
 .tab-button.active {
-  background: white;
+  background: #EEEEEE;
   color: #764ba2;
   font-weight: 700;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 7px rgba(255, 255, 255, 0.7);
 }
 
 .tab-content {
   text-align: left;
+  padding-bottom: 10px;
 }
 
 .time-display {
   margin: 8px 0 16px;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 700;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 12px;
@@ -67,6 +86,63 @@ h1 {
   text-align: center;
 }
 
+/* Chart container styles */
+.chart-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+/* Chart canvas styles */
+#today-chart,
+#week-chart,
+#month-chart,
+#week-pie-chart,
+#month-pie-chart {
+  max-width: 100%;
+  height: auto;
+}
+
+/* No data message styles */
+#today-no-data,
+#week-no-data,
+#month-no-data,
+#week-pie-no-data,
+#month-pie-no-data {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+  margin: 20px 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 15px;
+}
+
+/* Scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Keep the old list styles in case we need them for other tabs later */
 ul {
   list-style-type: none;
   padding-left: 0;
@@ -79,4 +155,20 @@ li {
   font-size: 1.1rem;
   margin: 6px 0;
   user-select: text;
+}
+
+/* Responsive adjustments for smaller charts */
+@media (max-width: 400px) {
+  body {
+    width: 320px;
+  }
+  
+  .chart-container {
+    padding: 10px;
+    min-height: 180px;
+  }
+  
+  .time-display {
+    font-size: 1.4rem;
+  }
 }
